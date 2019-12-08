@@ -1,0 +1,249 @@
+body {
+	background-image: url('images/dark.jpg');
+	font-size: 87.5%;
+	font-family: Arial, 'Lucida Sans Unicode';
+	line-height: 1.5;
+	text-align: left;
+	color: #CF5C3F;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:link, a:visited {
+	color: #CF5C3F;
+}
+
+a:hover, a:active {
+	background-color: #CF5C3F;
+	color: #FFF;
+}
+
+/* I have added a table in css, this will allow me to change font properties and background-color*/
+table {
+	width: 60%;
+	border-collapse: collapse;
+}
+
+
+th { 
+  background: #333; 
+  color: white; 
+  font-weight: bold; 
+}
+td, th { 
+  padding: 7px; 
+  border: 1px solid #ccc; 
+  
+}
+
+.body { /* This is the body of the website, the whole layout or size can be changed if i change the width and can also adjust to the window size. */
+	width: 70%;
+	clear: both;
+	margin: 0 auto;
+}
+
+
+.mainHeader img { /*this is the logo which can be resized using width */
+	width: 20%;
+	height: auto;
+	margin: 2% 0;
+}
+
+.mainHeader nav { /* navigation bar */
+	background-color: #666; /* Background colour of the navigation bar */
+	height: 40px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.mainHeader nav ul { /* navigation has unordered list */
+	list-style: none;
+	margin: 0 auto;
+}
+
+.mainHeader nav ul li { /* The nav bar text is aligned to left */
+	float: left;
+	display: inline;
+}
+
+.mainHeader nav a:link, mainHeader nav a :visited {
+	color: #FFF;
+	display: inline-block;
+	padding: 10px 25px;
+	height: 20px;
+}
+
+.mainHeader nav a:hover, .mainHeader nav a:active, /* hover over the nav will chnage to orange and after the link has been clicked*/
+.mainHeader nav .active a:mainHeader nav .active a:visited {
+	background-color: #CF5C3F;
+	text-shadow: none;
+}
+
+.mainHeader nav ul li a { /* all these will have the same border radius */
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.mainContent { /* this is the main  content where the text will go and will be separated between the post info */
+	line-height: 25px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.content { /* content size background color is white */
+	width: 100%;
+	float: left;
+	
+	
+}
+
+/* This top content is used to add border around the mainContent area with the background-color white, it is similar to a table to help keep the borders in place. */
+.topcontent {
+	background-color: #FFF;
+	border-radius: 5px;
+	-moz-border-radius: 5px; /* moz and webkit are used to make sure there are no compatibilit issues in monzilla firefox and chrome */
+	-webkit-border-radius: 5px;
+	padding: 3% 5%;
+	margin-top: 2%;
+}
+
+
+
+
+.post-info { /* this is used to add text between the title and content, used to show the author of the text */
+	font-style: italic;
+	color: #999;
+	font-size: 98%;
+}
+
+
+.mainFooter { /* will have a border same as the navigation bar but with the text inside */
+	height: 40px;
+	width: 100%;
+	float: left;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background-color: #666;
+	margin: 2% 0;
+	
+}
+
+.mainFooter p { /* adds a paragraph to set the some gap between the footer margin. */
+	width: 92%;
+	margin: 10px auto;
+	color: #FFF;	
+}
+	
+
+form
+{
+width:30%;
+padding:3px;
+border:1px solid #333;
+margin:5px auto;
+background-color: #666;
+}
+.textInput
+{
+margin-top:2px;
+height:28px;
+border:1px solid #333;
+font-size:24px;
+padding:1px;
+width:100%;
+}
+
+td
+{
+  text-align:right;
+  text-color:#CF5C3F;
+}
+#error_msg
+{
+    width:50%;
+    margin:5px auto;
+    height:30px;
+    border:1px solid #FF0000;
+    background:#FFB9B8;
+   color:#FF0000;
+   text-align:center;
+   padding-top:10px;
+}
+	
+	
+}
+/* these are used to adapt to screen resolutions like mobile devices, if you make the window small then you can see the layout changes too, i have to copy the css style over here too. */
+@media only screen and (min-width: 150px) and (max-width: 600px) /* min and max styles will be shown on device */
+	{
+	
+	
+	.body {
+			width: 90%;
+			font-size: 95%;
+		}
+		
+	.mainHeader img {
+		width: 100%;
+		}	
+		
+	.mainHeader nav {
+	height: 160px;
+		}
+
+	.mainHeader nav ul {
+		padding-left: 0
+		}
+
+	.mainHeader nav ul li {
+		width: 100%;
+		text-align: center;
+		}
+
+	.mainHeader nav a:link, mainHeader nav a :visited {
+		padding: 10px 25px;
+		height: 20px;
+		display: block;
+		}
+
+	.mainHeader nav ul li a {
+		padding: 10px 25px;
+		height: 20px;
+		}
+	
+	.content {
+		width: 100%;
+		float: left;
+		margin-top: 2%;
+		
+	}
+
+	.post-info {
+		display: none;
+	}
+	
+	.topcontent {
+		background-color: #FFF;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		padding: 3% 5%;
+		margin-top: 4%;
+	}
+
+
+	
+	.body {
+		background-image: url('img)
+	}
+
+
+	
+
+	
+}
