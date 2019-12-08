@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<?php
+
+$host = "localhost:27017";
+$userdb = "WestCrime";
+$database = $userdb.".WestCrime"; // this is the database with collection 
+$manager = new MongoDB\Driver\Manager( "mongodb://{$host}/{$userdb}" );
+$mongdb = '';
+
+ if ( isset( $_POST[ 'submit' ] ) ) {
+	
+	$Crime_type = addslashes (strip_tags( $_POST['Crime_type'] ));
+	$month = addslashes (strip_tags( $_POST['Month'] ));
+	$reportedby = addslashes (strip_tags( $_POST['Reported_By'] ));
+	$fallswithin = addslashes (strip_tags( $_POST['Falls_within'] ));
+	$loc = addslashes (strip_tags( $_POST['LOC'] ));
+	$sort = addslashes (strip_tags( $_POST['sort'] ));
+	$location = addslashes (strip_tags( $_POST['LSOA_name'] ));
+	$limit = addslashes (strip_tags( $_POST['limit'] ));
+		
+	$filter = [
+		'$and' => [
+			["Crime_type" => $Crime_type],
+			["Last_outcome_category" => $loc]],
+			'$or' => [
+			["Month" => $month],
+			["Reported_by" => $reportedby],
+			["Falls_within" => $fallswithin],
+			["LSOA_name" => new MongoDB\BSON\Regex($location)]
+		 ]];
+ 
+ $option = ['limit' => $limit];
+
+	 $mongdb = new MongoDB\Driver\Query( $filter, $option );
+	 $cursor = $manager->executeQuery( $database, $mongdb);
+
+	 
+	 }
+	  if (isset($_POST['search'])){
+    $LatitudeS = $_POST['LatitudeS'];
+	$filter = ['$or' => [['Latitude' =>floatval($LatitudeS)], ['Longitude' =>  doubleval($LatitudeS)]]];
+	$options = [];
+   $query = new MongoDB\Driver\Query($filter, $options);
+   $cursor = $manager->executeQuery( $database, $query);
+
+    
+}
+ 
+	?>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>MongoDB</title>
+
+	<!-- Custom fonts for this template -->
+	<link href="style1.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="style1.css" type="text/css" /> <!-- these html files are linked to the css file -->
+<meta name="viewpoint" content+"width=device-width, initial-scale=1.0">
+<header class="mainHeader">
+	
+	<style>
+
+
+
+}
+</style>
+
+	<script type="text/javascript"> $(document).ready( function () {
+    $('#dataTable').DataTable();
+} ); </script>
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<div class="card shadow mb-5">
+						<div class="card-header py-2">
+							<h1 class="h3 mb-2 text-gray-900">West-Yorkshire Crime Database</h1>
+						</div>
+
+						<nav><ul> <!-- "nav" tag is used to add a navigation bar around the "ul"unordered links -->
+		<!-- b tag makes text bold -->
+        
+        <!-- <b><li class="active"><a href="index2.html">Home</a></li></b> -->
+		<!--<b><li class="active"><a href="login.php">Login</a></li></b> -->
+		
+   
+   
+								
+								<select  button class="dropbtn" name="Crime_type">
+									<option value=""> Crime Type </option>
+									<option value="Burglary"> Burglary </option>
+									<option value="Other theft"> Other theft </option>
+									<option value="Vehicle crime"> Vehicle crime </option>
+									<option value="Violence and sexual offences"> Violence and sexual offences </option>
+									<option value="Other crime"> Other crime </option>
+									<option value="Criminal damage and arson"> Criminal damage and arson </option>
+									<option value="Bicycle theft"> Bicycle theft </option>
+									<option value="Public order"> Public order </option>
+									<option value="Shoplifting"> Shoplifting </option>
+									<option value="Drugs"> Drugs </option>
+									<option value="Theft from the person"> Theft from the person </option>
+									<option value="Anti-social behaviour"> Anti-social behaviour </option>
+									<option value="Robbery"> Robbery </option>
+									<option value="Possession of weapons"> Possession of weapons </option>
+
+								</select>
+									
+								<select class="dropbtn" name="Month">
+								<option value=""> Month </option>
+									<option value="2018-05"> 2018-05 </option>
+								</select>
+
+								<select class="dropbtn" name="Reported_By">
+								<option value=""> Reported By </option>
+									<option value="West Yorkshire Police"> West Yorkshire Police </option>
+								</select>
+
+								<select class="dropbtn" name="Falls_within">
+								<option value=""> Falls Within </option>
+									<option value="West Yorkshire Police"> West Yorkshire Police </option>
+								</select>
+
+
+								<select class="dropbtn" name="LSOA_name">
+									<option> LSOA name </option>
+									<option value="Bradford"> Bradford </option>
+									<option value="Barnsley"> Barnsley </option>
+								</select>
+
+								<select class="dropbtn" name="LOC">
+									<option> Last Outcome Category </option>
+									<option value="Investigation complete; no suspect identified"> Investigation complete; no suspect identified </option>
+									<option value="Awaiting court outcome"> Awaiting court outcome </option>
+									<option value="Under investigation"> Under investigation </option>
+									<option value="Unable to prosecute suspect"> Unable to prosecute suspect </option>
+									<option value="Local resolution"> Local resolution </option>
+									<option value="Action to be taken by another organisation"> Action to be taken by another organisation </option>
+									<option value="Further investigation is not in the public interest"> Further investigation is not in the public interest </option>
+									<option value="Further investigation is not in the public interest"> Further investigation is not in the public interest </option>
+								</select>
+
+								<select class="dropbtn" name="limit">
+									<option> Limit </option>
+									<option value="1"> 1 </option>
+									<option value="2"> 2 </option>
+									<option value="3"> 3 </option>
+									<option value="4"> 4 </option>
+									<option value="5"> 5 </option>
+								</select>
+								
+								<select class="dropbtn" name="sort">
+									<option> Sort </option>
+									<option value="1"> Asc </option>
+									<option value="-5"> Desc </option>
+								</select>
+							 
+								<a href="#" class="button">
+								
+								<!-- <span name="submit" class="text" type="submit">Search Database</span> -->
+								<button type="submit" name="submit" class="button"></span> Search Database</button>
+ 									
+ 								</a>
+<style>
+.dropbtn {
+  background-color: #666;
+  color: white;
+  padding: 7px;
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+} 
+</style>
+
+
+							 </ul></nav>
+								
+
+
+								
+							
+							</form>
+							<!-- Dropdowns end -->
+
+						</div> 
+						<div> 
+						<br>
+						</div>
+						<div class="card-body center">
+						<h2> Search by Longitude or Latitude </h2>
+						<form action="" method="post" class="center_nb">
+    <input type="text" name='LatitudeS'>
+   <input type="submit" name="search" value="Search">
+    </form>
+						</div>
+					</div>
+
+
+
+					<!-- Data Example -->
+					<!-- Modify table to view tables -->
+					<div class="card shadow mb-5">
+						<div class="card-header py-3">
+							<h1 class="m-0 font-weight-bold text-success">Database Results</h1>
+						</div>
+						<div class="card-body">
+							<div class="table-users" id="table-users">
+							<div class="header">Crime</div>
+								<table class="rwd-table" width="100%" cellspacing="0">
+
+									<thead>
+										<tr>
+											<th>Reported_by</th>
+											<th>Falls within</th>
+											<th>Longitude</th>
+											<th>Latitude</th>
+											<th>Location</th>
+											<th>LSOA code</th>
+											<th>LSOA name</th>
+											<th>Crime type</th>
+											<th>Last outcome category</th>
+											<th>Context</th>
+										</tr>
+									</thead>
+
+
+									<?php
+
+									foreach ( $cursor as $r ) {
+										?>
+									<tbody>
+										<tr>
+
+											<td>
+												<?php echo $r->Reported_by;?> </td>
+											<td>
+												<?php echo $r->Falls_within;?> </td>
+											<td>
+												<?php echo $r->Longitude;?> </td>
+											<td>
+												<?php echo $r->Latitude;?> </td>
+											<td>
+												<?php echo $r->Location;?> </td>
+											<td>
+												<?php echo $r->LSOA_code;?> </td>
+											<td>
+												<?php echo $r->LSOA_name;?> </td>
+											<td>
+												<?php echo $r->Crime_type;?> </td>
+											<td>
+												<?php echo $r->Last_outcome_category;?> </td>
+											<td>
+												<?php echo $r->Context;?> </td>
+										</tr>
+									</tbody>
+									<?php									
+            }
+			?>
+
+
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+			<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+
+	<!-- Bootstrap core JavaScript-->
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script src="js/sb-admin-2.min.js"></script>
+
+	<!-- Page level plugins -->
+	<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+	<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="js/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>
